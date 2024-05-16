@@ -70,7 +70,7 @@ class ProxyGenerator(object):
     def get_session(self):
         return self._session
 
-    def Luminati(self, usr, passwd, proxy_port):
+    def Luminati(self, usr, passwd, proxy_port, host="zproxy.lum-superproxy.io"):
         """ Setups a luminati proxy without refreshing capabilities.
 
         :param usr: scholarly username, optional by default None
@@ -94,7 +94,7 @@ class ProxyGenerator(object):
             self.logger.warning("Not enough parameters were provided for the Luminati proxy. Reverting to a local connection.")
             return
         session_id = random.random()
-        proxy = f"http://{username}-session-{session_id}:{password}@zproxy.lum-superproxy.io:{port}"
+        proxy = f"http://{username}-session-{session_id}:{password}@{host}:{port}"
         proxy_works = self._use_proxy(http=proxy, https=proxy)
         if proxy_works:
             self.logger.info("Luminati proxy setup successfully")
